@@ -54,7 +54,7 @@ public class Launcher : MonoBehaviour
             }
                 
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             var _projectile = Instantiate(projectile, launchPoint.position, launchPoint.rotation);
             _projectile.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchPoint.up;
