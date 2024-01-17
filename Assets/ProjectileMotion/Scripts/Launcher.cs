@@ -28,7 +28,6 @@ public class Launcher : MonoBehaviour
     void Update()
     {
         forceCounter.text = launchSpeed.ToString();
-        
 
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
         if (scrollWheel > 0)
@@ -40,7 +39,6 @@ public class Launcher : MonoBehaviour
             launchSpeed -= speedStep;
         }
 
-
         if (lineRenderer != null)
         {
             if (drawTrajectory.isOn == true)
@@ -48,16 +46,19 @@ public class Launcher : MonoBehaviour
                 DrawTrajectory();
                 lineRenderer.enabled = true;
             }
-            else if (drawTrajectory.isOn == false)
-            {
+            else
                 lineRenderer.enabled = false;
-            }
-                
         }
+        shoot(launchPoint.up * launchSpeed);
+    }
+
+
+    public void shoot(Vector2 velocity)
+    {
         if (Input.GetMouseButtonDown(1))
         {
             var _projectile = Instantiate(projectile, launchPoint.position, launchPoint.rotation);
-            _projectile.GetComponent<Rigidbody2D>().velocity = launchSpeed * launchPoint.up;
+            _projectile.GetComponent<Rigidbody2D>().velocity = velocity;
         }
     }
 
