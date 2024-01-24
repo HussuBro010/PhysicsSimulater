@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ProjectileMotion.unity
     guid: 108493815e17860439b0cfbea276b971
+  - enabled: 1
+    path: Assets/Scenes/ElectricField.unity
+    guid: 9f3803cb3b102b942b81509f0767583b
   m_configObjects: {}

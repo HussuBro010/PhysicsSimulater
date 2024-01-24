@@ -22,6 +22,11 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene("ProjectileMotion");
     }
 
+    public void electricField()
+    {
+        SceneManager.LoadScene("ElectricField");
+    }
+
     public void back()
     {
         SceneManager.LoadScene(0);

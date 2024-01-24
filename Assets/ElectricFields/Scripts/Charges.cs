@@ -16,6 +16,8 @@ public class Charges : MonoBehaviour
     public int numberOfPositives;
     public int numberOfNegatives;
 
+    Vector2 launchVelocity;
+
     void Start()
     {
         
@@ -29,8 +31,8 @@ public class Charges : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            var _pos = Instantiate(positive, mousePos, Quaternion.identity);
-            charges.Add(_pos);
+            var pos = Instantiate(positive, mousePos, Quaternion.identity);
+            charges.Add(pos);
             numberOfPositives++;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))

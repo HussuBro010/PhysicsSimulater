@@ -26,11 +26,18 @@ public class Vector : MonoBehaviour
         Vector2 force = Vector2.zero;
         foreach (ChargeObject charge in charges.charges)
         {
-            Vector2 directionToCharge = (Vector2)charge.transform.position - (Vector2)transform.position;
-            float distanceSquared = directionToCharge.sqrMagnitude;
-            // Assuming that the force magnitude is inversely proportional to the square of the distance
-            float forceMagnitude = charge.chargeMagnitude / distanceSquared;
-            force += directionToCharge.normalized * forceMagnitude;
+            if (Vector2.Distance(transform.position, charge.transform.position) < Mathf.Abs(charge.chargeMagnitude))
+            {
+                Vector2 directionToCharge = (Vector2)charge.transform.position - (Vector2)transform.position;
+                float distanceSquared = directionToCharge.sqrMagnitude;
+                // Use Gaussian function to calculate force magnitude
+                float forceMagnitude = charge.chargeMagnitude * Mathf.Exp(-0.5f * distanceSquared / (charge.chargeMagnitude * charge.chargeMagnitude));
+                force += directionToCharge.normalized * forceMagnitude;
+            }
+            else
+            {
+                transform.rotation = Quaternion.identity;
+            }
         }
         return force;
     }
