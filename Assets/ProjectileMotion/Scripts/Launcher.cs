@@ -1,24 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Launcher : MonoBehaviour
 {
-    public Transform launchPoint;
-    public GameObject projectile;
-    public float launchSpeed = 15f;
-    float speedStep = 1f;
+    [SerializeField] private Transform launchPoint;
+    [SerializeField] private Ball projectile;
+    [SerializeField] private float launchSpeed = 15f;
+    [SerializeField] private float speedStep = 1f;
 
     [Header("****Trajectory Display****")]
-    public LineRenderer lineRenderer;
-    public int linePoints = 500;
-    public float timeIntervalInPoints = 0.01f;
+
+    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private int linePoints = 500;
+    [SerializeField] private float timeIntervalInPoints = 0.01f;
 
     [Header("===UI===")]
     public TextMeshProUGUI forceCounter;
     public Toggle drawTrajectory;
+    public List<Ball> projectiles;
 
     private void Start()
     {
@@ -38,28 +41,30 @@ public class Launcher : MonoBehaviour
         {
             launchSpeed -= speedStep;
         }
-
-        if (lineRenderer != null)
+        if (!drawTrajectory.isOn)
         {
-            if (drawTrajectory.isOn == true)
-            {
-                DrawTrajectory();
-                lineRenderer.enabled = true;
-            }
-            else
-                lineRenderer.enabled = false;
+            lineRenderer.enabled = false;
         }
-        shoot(launchPoint.up * launchSpeed);
+        else if(drawTrajectory.isOn)
+        {
+            lineRenderer.enabled = true;
+            DrawTrajectory();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            shoot(projectile, launchPoint.up * launchSpeed);
+        }
     }
 
 
-    public void shoot(Vector2 velocity)
+    public void shoot(Ball projectile, Vector2 velocity)
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            var _projectile = Instantiate(projectile, launchPoint.position, launchPoint.rotation);
-            _projectile.GetComponent<Rigidbody2D>().velocity = velocity;
-        }
+        projectile = projectile.GetComponent<Ball>();
+        var _projectile = Instantiate(projectile, launchPoint.position, launchPoint.rotation);
+        _projectile.GetComponent<Rigidbody2D>().velocity = velocity;
+        projectiles.Add(_projectile);
+
     }
 
     void DrawTrajectory()
@@ -77,5 +82,16 @@ public class Launcher : MonoBehaviour
             lineRenderer.SetPosition(i, origin + point);
             time += timeIntervalInPoints;
         }
+    }
+
+    public void resetScreen()
+    {
+        foreach (Ball ball in projectiles)
+        {
+            Destroy(ball.gameObject);
+        }
+        projectiles.RemoveAll(x => x != null);
+        launchSpeed = 15f;
+        drawTrajectory.isOn = true;
     }
 }

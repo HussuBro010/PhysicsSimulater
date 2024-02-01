@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private TextMeshProUGUI acc;
     [SerializeField] private TextMeshProUGUI velLabel;
     [SerializeField] private TextMeshProUGUI accLabel;
+
     GameObject toggle;
     Toggle values;
     Rigidbody2D rb;
@@ -20,6 +21,11 @@ public class Ball : MonoBehaviour
         toggle = GameObject.Find("Values");
         values = toggle.GetComponent<Toggle>();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void Init(Vector2 velocity)
+    {
+        rb.AddForce(velocity, ForceMode2D.Impulse);
     }
 
     // Update is called once per frame
