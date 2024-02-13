@@ -10,7 +10,7 @@ public class Launcher : MonoBehaviour
     [SerializeField] private Transform launchPoint;
     [SerializeField] private Ball projectile;
     [SerializeField] private float launchSpeed = 15f;
-    [SerializeField] private float speedStep = 1f;
+    [SerializeField] private float speedStep = 5f;
 
     [Header("****Trajectory Display****")]
 
@@ -35,11 +35,61 @@ public class Launcher : MonoBehaviour
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
         if (scrollWheel > 0)
         {
-            launchSpeed += speedStep;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    launchSpeed += 100f;
+                }
+                else
+                {
+                    launchSpeed += 10f;
+                }
+            }
+            else if (Input.GetKey(KeyCode.LeftAlt))
+            {
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    launchSpeed += 0.1f;
+                }
+                else
+                {
+                    launchSpeed += 1f;
+                }
+            }
+            else
+            {
+                launchSpeed += speedStep;
+            }
         }
         if (scrollWheel < 0)
         {
-            launchSpeed -= speedStep;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    launchSpeed -= 100f;
+                }
+                else
+                {
+                    launchSpeed -= 10f;
+                }
+            }
+            else if (Input.GetKey(KeyCode.LeftAlt))
+            {
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    launchSpeed -= 0.1f;
+                }
+                else
+                {
+                    launchSpeed -= 1f;
+                }
+            }
+            else
+            {
+                launchSpeed -= speedStep;
+            }
         }
         if (!drawTrajectory.isOn)
         {
@@ -54,6 +104,11 @@ public class Launcher : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             shoot(projectile, launchPoint.up * launchSpeed);
+        }
+
+        if (launchSpeed < 0f)
+        {
+            launchSpeed = 0f;
         }
     }
 

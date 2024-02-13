@@ -1017,7 +1017,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 296, y: -51}
+  m_AnchoredPosition: {x: 296, y: -44}
   m_SizeDelta: {x: 459.323, y: 57.4154}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &738915702
@@ -1287,7 +1287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 296, y: -116}
+  m_AnchoredPosition: {x: 296, y: -101.42}
   m_SizeDelta: {x: 459.323, y: 57.4154}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &967863065
@@ -2506,7 +2506,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -145, y: 65}
+  m_AnchoredPosition: {x: -145, y: 0}
   m_SizeDelta: {x: 242.8298, y: 76.0166}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1851300700
@@ -2777,12 +2777,13 @@ MonoBehaviour:
   launchPoint: {fileID: 1314698714}
   projectile: {fileID: 2122907460117548148, guid: 10e1cace8c96576479e4afb94ae821bb, type: 3}
   launchSpeed: 15
-  speedStep: 1
+  speedStep: 5
   lineRenderer: {fileID: 1948468223}
   linePoints: 500
   timeIntervalInPoints: 0.01
   forceCounter: {fileID: 538728137}
   drawTrajectory: {fileID: 738915702}
+  projectiles: []
 --- !u!1 &2039639967
 GameObject:
   m_ObjectHideFlags: 0
