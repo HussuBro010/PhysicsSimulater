@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -36,7 +35,7 @@ public class Spawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             string result = String.Join("", elementSpawnerCode);
-            if (result != null)
+            if (defineElements(result) != null)
             {
                 Instantiate(defineElements(result), Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)), transform.rotation);
             }

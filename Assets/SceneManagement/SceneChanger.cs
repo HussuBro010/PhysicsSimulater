@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    public GameObject panel;
     // Start is called before the first frame update
     void Start()
     {
-        
+        panel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -30,5 +31,20 @@ public class SceneChanger : MonoBehaviour
     public void back()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void patchNotes()
+    {
+        panel.SetActive(true);
+    }
+
+    public void patchNotesBack()
+    {
+        panel.SetActive(false);
+    }
+
+    public void quit()
+    {
+        quit();
     }
 }
